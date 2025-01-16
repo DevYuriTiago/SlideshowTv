@@ -42,20 +42,15 @@ function showSlide() {
 
 function nextSlide() {
   currentSlide++;
-
-  if (currentSlide > slides.length) {
+  if (currentSlide >= slides.length) {
     currentSlide = 0;
   }
-
   showSlide();
 }
 
 function presentation() {
-  const { pages } = slides[currentSlide];
-
   showSlide();
-  setInterval(nextSlide, slideInterval*pages);
-
+  setInterval(nextSlide, slideInterval);
 }
 
 presentation();
