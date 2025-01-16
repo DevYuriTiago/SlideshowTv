@@ -1,4 +1,4 @@
-const slideInterval = 10000;
+const slideInterval = 25000;
 
 const slides = [
   {
