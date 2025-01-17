@@ -33,11 +33,29 @@ const slides = [
 ];
 
 let currentSlide = 0;
-const iframe = document.getElementById('slideshow');
+const slideContainer = document.getElementById('slideContainer');
+const slideElements = [];
+
+// Criar todos os iframes no início
+function createSlides() {
+  slides.forEach((slide, index) => {
+    const slideDiv = document.createElement('div');
+    slideDiv.className = 'slide';
+    if (index === 0) slideDiv.classList.add('active');
+    
+    const iframe = document.createElement('iframe');
+    iframe.src = slide.url;
+    slideDiv.appendChild(iframe);
+    slideContainer.appendChild(slideDiv);
+    slideElements.push(slideDiv);
+  });
+}
 
 function showSlide() {
-  const { url } = slides[currentSlide];
-  iframe.src = url;
+  // Remover classe active de todos os slides
+  slideElements.forEach(slide => slide.classList.remove('active'));
+  // Adicionar classe active ao slide atual
+  slideElements[currentSlide].classList.add('active');
 }
 
 function nextSlide() {
@@ -49,7 +67,7 @@ function nextSlide() {
 }
 
 function presentation() {
-  showSlide();
+  createSlides();
   setInterval(nextSlide, slideInterval);
 }
 
